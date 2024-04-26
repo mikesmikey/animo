@@ -1,11 +1,16 @@
 {
   "ids": {
-    "User": 4
+    "User": 4,
+    "Studio": 4
   },
   "models": {
     "User": {
       "2bcece50-03a7-11ef-88cb-d1fe650b8088": "{\"login\":\"test3\",\"id\":\"2bcece50-03a7-11ef-88cb-d1fe650b8088\",\"password\":\"test3\"}",
       "9b6fcf00-03b3-11ef-9c92-693fcaf422ed": "{\"login\":\"test5\",\"id\":\"9b6fcf00-03b3-11ef-9c92-693fcaf422ed\",\"password\":\"test5\"}"
+    },
+    "Studio": {
+      "f26800b0-03b9-11ef-990b-87711060b80b": "{\"id\":\"f26800b0-03b9-11ef-990b-87711060b80b\",\"name\":\"stu1e\",\"website\":\"stu1e.com\"}",
+      "fc505190-03b9-11ef-990b-87711060b80b": "{\"id\":\"fc505190-03b9-11ef-990b-87711060b80b\",\"name\":\"stu2\",\"website\":\"stu2.com\"}"
     }
   }
 }

@@ -1,3 +1,4 @@
+import {intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -7,27 +8,28 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
+import {UuidInterceptor} from '../interceptors';
 import {Studio} from '../models';
 import {StudioRepository} from '../repositories';
 
 export class StudioController {
   constructor(
     @repository(StudioRepository)
-    public studioRepository : StudioRepository,
-  ) {}
+    public studioRepository: StudioRepository,
+  ) { }
 
   @post('/studio')
-  @response(200, {
+  @response(201, {
     description: 'Studio model instance',
     content: {'application/json': {schema: getModelSchemaRef(Studio)}},
   })
@@ -37,7 +39,7 @@ export class StudioController {
         'application/json': {
           schema: getModelSchemaRef(Studio, {
             title: 'NewStudio',
-            
+
           }),
         },
       },
@@ -104,6 +106,7 @@ export class StudioController {
       },
     },
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async findById(
     @param.path.string('id') id: string,
     @param.filter(Studio, {exclude: 'where'}) filter?: FilterExcludingWhere<Studio>
@@ -115,6 +118,7 @@ export class StudioController {
   @response(204, {
     description: 'Studio PATCH success',
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -133,6 +137,7 @@ export class StudioController {
   @response(204, {
     description: 'Studio PUT success',
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() studio: Studio,
@@ -144,6 +149,7 @@ export class StudioController {
   @response(204, {
     description: 'Studio DELETE success',
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.studioRepository.deleteById(id);
   }

@@ -1,33 +1,35 @@
+import {intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
-  repository,
   Where,
+  repository,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
+import {UuidInterceptor} from '../interceptors';
 import {User} from '../models';
 import {UserRepository} from '../repositories';
 
 export class UserController {
   constructor(
     @repository(UserRepository)
-    public userRepository : UserRepository,
-  ) {}
+    public userRepository: UserRepository
+  ) { }
 
   @post('/user')
-  @response(200, {
+  @response(201, {
     description: 'User model instance',
     content: {'application/json': {schema: getModelSchemaRef(User)}},
   })
@@ -37,7 +39,7 @@ export class UserController {
         'application/json': {
           schema: getModelSchemaRef(User, {
             title: 'NewUser',
-            
+
           }),
         },
       },
@@ -104,6 +106,7 @@ export class UserController {
       },
     },
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async findById(
     @param.path.string('id') id: string,
     @param.filter(User, {exclude: 'where'}) filter?: FilterExcludingWhere<User>
@@ -115,6 +118,7 @@ export class UserController {
   @response(204, {
     description: 'User PATCH success',
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -133,6 +137,7 @@ export class UserController {
   @response(204, {
     description: 'User PUT success',
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() user: User,
@@ -144,6 +149,7 @@ export class UserController {
   @response(204, {
     description: 'User DELETE success',
   })
+  @intercept(UuidInterceptor.BINDING_KEY)
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.userRepository.deleteById(id);
   }

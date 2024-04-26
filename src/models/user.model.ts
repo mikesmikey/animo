@@ -1,4 +1,5 @@
 import {Entity, model, property} from '@loopback/repository';
+import uuid from 'uuid';
 
 @model()
 export class User extends Entity {
@@ -11,7 +12,11 @@ export class User extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    defaultFn: "uuid",
+    validator: (value: string) => {
+      if (!uuid.validate(value))
+        throw new Error('Invalid id format (must be in UUID format)')
+    }
   })
   id?: string;
 

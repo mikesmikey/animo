@@ -17,13 +17,11 @@ export class Chapter extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
   studioId: string;
 
   @property({
     type: 'string',
-    required: true,
   })
   animeId: string;
 

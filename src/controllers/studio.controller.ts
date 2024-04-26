@@ -1,13 +1,16 @@
-import {intercept} from '@loopback/core';
+import {inject, intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
-  repository,
   Where,
+  repository,
 } from '@loopback/repository';
 import {
+  RequestContext,
+  Response,
+  RestBindings,
   del,
   get,
   getModelSchemaRef,
@@ -16,7 +19,7 @@ import {
   post,
   put,
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {UuidInterceptor} from '../interceptors';
 import {Studio} from '../models';
@@ -26,6 +29,8 @@ export class StudioController {
   constructor(
     @repository(StudioRepository)
     public studioRepository: StudioRepository,
+    @inject(RestBindings.Http.CONTEXT)
+    private requestCtx: RequestContext,
   ) { }
 
   @post('/studio')
@@ -45,8 +50,8 @@ export class StudioController {
       },
     })
     studio: Studio,
-  ): Promise<Studio> {
-    return this.studioRepository.create(studio);
+  ): Promise<Response> {
+    return this.requestCtx.response.status(201).send(await this.studioRepository.create(studio));
   }
 
   @get('/studio/count')

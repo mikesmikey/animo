@@ -1,13 +1,16 @@
-import {intercept} from '@loopback/core';
+import {inject, intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
-  repository,
   Where,
+  repository,
 } from '@loopback/repository';
 import {
+  RequestContext,
+  Response,
+  RestBindings,
   del,
   get,
   getModelSchemaRef,
@@ -16,7 +19,7 @@ import {
   post,
   put,
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {UuidInterceptor} from '../interceptors';
 import {Anime} from '../models';
@@ -26,6 +29,8 @@ export class AnimeController {
   constructor(
     @repository(AnimeRepository)
     public animeRepository: AnimeRepository,
+    @inject(RestBindings.Http.CONTEXT)
+    private requestCtx: RequestContext,
   ) { }
 
   @post('/anime')
@@ -45,8 +50,8 @@ export class AnimeController {
       },
     })
     anime: Anime,
-  ): Promise<Anime> {
-    return this.animeRepository.create(anime);
+  ): Promise<Response> {
+    return this.requestCtx.response.status(201).send(await this.animeRepository.create(anime));
   }
 
   @get('/anime/count')

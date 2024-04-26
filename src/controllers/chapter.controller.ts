@@ -1,13 +1,15 @@
-import {intercept} from '@loopback/core';
+import {inject, intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
-  repository,
   Where,
+  repository,
 } from '@loopback/repository';
 import {
+  RequestContext,
+  RestBindings,
   del,
   get,
   getModelSchemaRef,
@@ -17,6 +19,7 @@ import {
   put,
   requestBody,
   response,
+  Response
 } from '@loopback/rest';
 import {UuidInterceptor} from '../interceptors';
 import {Chapter} from '../models';
@@ -26,6 +29,8 @@ export class ChapterController {
   constructor(
     @repository(ChapterRepository)
     public chapterRepository: ChapterRepository,
+    @inject(RestBindings.Http.CONTEXT)
+    private requestCtx: RequestContext,
   ) { }
 
   @post('/chapter')
@@ -45,8 +50,8 @@ export class ChapterController {
       },
     })
     chapter: Chapter,
-  ): Promise<Chapter> {
-    return this.chapterRepository.create(chapter);
+  ): Promise<Response> {
+    return this.requestCtx.response.status(201).send(await this.chapterRepository.create(chapter));
   }
 
   @get('/chapter/count')

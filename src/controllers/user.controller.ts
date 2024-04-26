@@ -1,4 +1,4 @@
-import {intercept} from '@loopback/core';
+import {inject, intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -8,7 +8,9 @@ import {
   repository,
 } from '@loopback/repository';
 import {
-  del,
+  RequestContext,
+  Response,
+  RestBindings, del,
   get,
   getModelSchemaRef,
   param,
@@ -25,7 +27,9 @@ import {UserRepository} from '../repositories';
 export class UserController {
   constructor(
     @repository(UserRepository)
-    public userRepository: UserRepository
+    public userRepository: UserRepository,
+    @inject(RestBindings.Http.CONTEXT)
+    private requestCtx: RequestContext,
   ) { }
 
   @post('/user')
@@ -45,8 +49,8 @@ export class UserController {
       },
     })
     user: User,
-  ): Promise<User> {
-    return this.userRepository.create(user);
+  ): Promise<Response> {
+    return this.requestCtx.response.status(201).send(await this.userRepository.create(user))
   }
 
   @get('/user/count')

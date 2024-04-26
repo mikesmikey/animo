@@ -1,4 +1,7 @@
 import {ApplicationConfig, JsAnimoApplication} from './application';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export * from './application';
 

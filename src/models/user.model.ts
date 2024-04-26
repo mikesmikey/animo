@@ -5,12 +5,6 @@ import uuid from 'uuid';
 export class User extends Entity {
   @property({
     type: 'string',
-    required: true,
-  })
-  login: string;
-
-  @property({
-    type: 'string',
     id: true,
     defaultFn: "uuid",
     validator: (value: string) => {
@@ -23,6 +17,13 @@ export class User extends Entity {
   @property({
     type: 'string',
     required: true,
+  })
+  login: string;
+
+  @property({
+    type: 'string',
+    required: true,
+    hidden: true,
   })
   password: string;
 

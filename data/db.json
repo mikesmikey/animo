@@ -1,7 +1,9 @@
 {
   "ids": {
     "User": 4,
-    "Studio": 4
+    "Studio": 4,
+    "Anime": 4,
+    "Chapter": 5
   },
   "models": {
     "User": {
@@ -9,8 +11,17 @@
       "9b6fcf00-03b3-11ef-9c92-693fcaf422ed": "{\"login\":\"test5\",\"id\":\"9b6fcf00-03b3-11ef-9c92-693fcaf422ed\",\"password\":\"test5\"}"
     },
     "Studio": {
-      "f26800b0-03b9-11ef-990b-87711060b80b": "{\"id\":\"f26800b0-03b9-11ef-990b-87711060b80b\",\"name\":\"stu1e\",\"website\":\"stu1e.com\"}",
       "fc505190-03b9-11ef-990b-87711060b80b": "{\"id\":\"fc505190-03b9-11ef-990b-87711060b80b\",\"name\":\"stu2\",\"website\":\"stu2.com\"}"
+    },
+    "Anime": {
+      "c5741ce0-03c0-11ef-88f0-6b2d02e3fa92": "{\"id\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"name\":\"anime2\",\"year\":0,\"studioId\":\"f26800b0-03b9-11ef-990b-87711060b80b\"}",
+      "c6b43e00-03c0-11ef-88f0-6b2d02e3fa92": "{\"id\":\"c6b43e00-03c0-11ef-88f0-6b2d02e3fa92\",\"name\":\"anime3\",\"year\":0,\"studioId\":\"f26800b0-03b9-11ef-990b-87711060b80b\"}"
+    },
+    "Chapter": {
+      "14477c70-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"14477c70-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter1\",\"duration\":0,\"animeId\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"studioId\":\"fc505190-03b9-11ef-990b-87711060b80b\"}",
+      "1ebdb570-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"1ebdb570-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter2\",\"duration\":0,\"animeId\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"studioId\":\"fc505190-03b9-11ef-990b-87711060b80b\"}",
+      "20fa8610-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"20fa8610-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter3\",\"duration\":0,\"animeId\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"studioId\":\"fc505190-03b9-11ef-990b-87711060b80b\"}",
+      "453f0a00-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"453f0a00-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter4\",\"duration\":0,\"animeId\":\"test\",\"studioId\":\"tes\"}"
     }
   }
 }

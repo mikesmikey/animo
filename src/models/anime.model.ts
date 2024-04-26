@@ -1,5 +1,4 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Studio} from './studio.model';
+import {Entity, model, property} from '@loopback/repository';
 import uuid from 'uuid';
 
 @model()
@@ -27,8 +26,10 @@ export class Anime extends Entity {
   })
   year: number;
 
-  @belongsTo(() => Studio)
-  studioId: string;
+  @property({
+    type: 'string',
+  })
+  studioId: string | null;
 
   constructor(data?: Partial<Anime>) {
     super(data);

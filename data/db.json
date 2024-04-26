@@ -1,9 +1,9 @@
 {
   "ids": {
     "User": 7,
-    "Studio": 4,
-    "Anime": 4,
-    "Chapter": 5
+    "Studio": 8,
+    "Anime": 8,
+    "Chapter": 6
   },
   "models": {
     "User": {
@@ -13,18 +13,10 @@
       "394b2d80-03ca-11ef-93c9-d735df9c3a15": "{\"id\":\"394b2d80-03ca-11ef-93c9-d735df9c3a15\",\"login\":\"test1\",\"password\":\"test1\"}",
       "6453def0-03ca-11ef-b6b2-db0e7807f73a": "{\"id\":\"6453def0-03ca-11ef-b6b2-db0e7807f73a\",\"login\":\"test2\",\"password\":\"test2\"}"
     },
-    "Studio": {
-      "fc505190-03b9-11ef-990b-87711060b80b": "{\"id\":\"fc505190-03b9-11ef-990b-87711060b80b\",\"name\":\"stu2\",\"website\":\"stu2.com\"}"
-    },
-    "Anime": {
-      "c5741ce0-03c0-11ef-88f0-6b2d02e3fa92": "{\"id\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"name\":\"anime2\",\"year\":0,\"studioId\":\"f26800b0-03b9-11ef-990b-87711060b80b\"}",
-      "c6b43e00-03c0-11ef-88f0-6b2d02e3fa92": "{\"id\":\"c6b43e00-03c0-11ef-88f0-6b2d02e3fa92\",\"name\":\"anime3\",\"year\":0,\"studioId\":\"f26800b0-03b9-11ef-990b-87711060b80b\"}"
-    },
+    "Studio": {},
+    "Anime": {},
     "Chapter": {
-      "14477c70-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"14477c70-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter1\",\"duration\":0,\"animeId\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"studioId\":\"fc505190-03b9-11ef-990b-87711060b80b\"}",
-      "1ebdb570-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"1ebdb570-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter2\",\"duration\":0,\"animeId\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"studioId\":\"fc505190-03b9-11ef-990b-87711060b80b\"}",
-      "20fa8610-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"20fa8610-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter3\",\"duration\":0,\"animeId\":\"c5741ce0-03c0-11ef-88f0-6b2d02e3fa92\",\"studioId\":\"fc505190-03b9-11ef-990b-87711060b80b\"}",
-      "453f0a00-03c3-11ef-adb4-ab790d7b9b6e": "{\"id\":\"453f0a00-03c3-11ef-adb4-ab790d7b9b6e\",\"name\":\"chapter4\",\"duration\":0,\"animeId\":\"test\",\"studioId\":\"tes\"}"
+      "59778260-03d0-11ef-ae4c-0787bdcfba43": "{\"id\":\"59778260-03d0-11ef-ae4c-0787bdcfba43\",\"name\":\"chapter1\",\"duration\":0,\"animeId\":\"4870fd20-03d0-11ef-ae4c-0787bdcfba43\",\"studioId\":null}"
     }
   }
 }

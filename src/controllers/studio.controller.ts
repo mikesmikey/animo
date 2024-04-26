@@ -23,12 +23,16 @@ import {
 } from '@loopback/rest';
 import {UuidInterceptor} from '../interceptors';
 import {Studio} from '../models';
-import {StudioRepository} from '../repositories';
+import {AnimeRepository, ChapterRepository, StudioRepository} from '../repositories';
 
 export class StudioController {
   constructor(
     @repository(StudioRepository)
     public studioRepository: StudioRepository,
+    @repository(AnimeRepository)
+    public animeRepository: AnimeRepository,
+    @repository(ChapterRepository)
+    public chapterRepository: ChapterRepository,
     @inject(RestBindings.Http.CONTEXT)
     private requestCtx: RequestContext,
   ) { }
@@ -157,5 +161,9 @@ export class StudioController {
   @intercept(UuidInterceptor.BINDING_KEY)
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.studioRepository.deleteById(id);
+
+    // set anime and chapter related id records  to null
+    await this.animeRepository.updateAll({studioId: null}, {studioId: id})
+    await this.chapterRepository.updateAll({studioId: null}, {studioId: id})
   }
 }

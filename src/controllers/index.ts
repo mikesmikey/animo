@@ -5,3 +5,4 @@ export * from './chapter-anime.controller';
 export * from './chapter-studio.controller';
 export * from './anime-studio.controller';
 export * from './anime.controller';
+export * from './chapter.controller';

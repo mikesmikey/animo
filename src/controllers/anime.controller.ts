@@ -1,13 +1,16 @@
-import {intercept} from '@loopback/core';
+import {inject, intercept} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
-  repository,
   Where,
+  repository,
 } from '@loopback/repository';
 import {
+  RequestContext,
+  Response,
+  RestBindings,
   del,
   get,
   getModelSchemaRef,
@@ -16,16 +19,20 @@ import {
   post,
   put,
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
 import {UuidInterceptor} from '../interceptors';
 import {Anime} from '../models';
-import {AnimeRepository} from '../repositories';
+import {AnimeRepository, ChapterRepository} from '../repositories';
 
 export class AnimeController {
   constructor(
     @repository(AnimeRepository)
     public animeRepository: AnimeRepository,
+    @repository(ChapterRepository)
+    public chapterRepository: ChapterRepository,
+    @inject(RestBindings.Http.CONTEXT)
+    private requestCtx: RequestContext,
   ) { }
 
   @post('/anime')
@@ -45,8 +52,8 @@ export class AnimeController {
       },
     })
     anime: Anime,
-  ): Promise<Anime> {
-    return this.animeRepository.create(anime);
+  ): Promise<Response> {
+    return this.requestCtx.response.status(201).send(await this.animeRepository.create(anime));
   }
 
   @get('/anime/count')
@@ -152,5 +159,7 @@ export class AnimeController {
   @intercept(UuidInterceptor.BINDING_KEY)
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.animeRepository.deleteById(id);
+
+    await this.chapterRepository.updateAll({animeId: null}, {animeId: id})
   }
 }

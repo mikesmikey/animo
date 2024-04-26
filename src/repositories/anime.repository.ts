@@ -1,8 +1,7 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor} from '@loopback/repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository, BelongsToAccessor} from '@loopback/repository';
 import {DbDataSource} from '../datasources';
 import {Anime, AnimeRelations, Studio} from '../models';
-import {StudioRepository} from './studio.repository';
 
 export class AnimeRepository extends DefaultCrudRepository<
   Anime,
@@ -13,10 +12,8 @@ export class AnimeRepository extends DefaultCrudRepository<
   public readonly studio: BelongsToAccessor<Studio, typeof Anime.prototype.id>;
 
   constructor(
-    @inject('datasources.db') dataSource: DbDataSource, @repository.getter('StudioRepository') protected studioRepositoryGetter: Getter<StudioRepository>,
+    @inject('datasources.db') dataSource: DbDataSource,
   ) {
     super(Anime, dataSource);
-    this.studio = this.createBelongsToAccessorFor('studio', studioRepositoryGetter,);
-    this.registerInclusionResolver('studio', this.studio.inclusionResolver);
   }
 }

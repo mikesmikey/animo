@@ -20,6 +20,7 @@ import {
   requestBody,
   response
 } from '@loopback/rest';
+import * as bcrypt from 'bcryptjs';
 import {UuidInterceptor} from '../interceptors';
 import {User} from '../models';
 import {UserRepository} from '../repositories';
@@ -50,6 +51,7 @@ export class UserController {
     })
     user: User,
   ): Promise<Response> {
+    user.password = await bcrypt.hash(user.password, 10)
     return this.requestCtx.response.status(201).send(await this.userRepository.create(user))
   }
 

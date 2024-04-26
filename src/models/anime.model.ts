@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Studio} from './studio.model';
 
 @model()
 export class Anime extends Entity {
@@ -21,11 +22,8 @@ export class Anime extends Entity {
   })
   year: number;
 
-  @property({
-    type: 'string',
-  })
-  studioId?: string;
-
+  @belongsTo(() => Studio)
+  studioId: string;
 
   constructor(data?: Partial<Anime>) {
     super(data);
